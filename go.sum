@@ -1,0 +1,4 @@
+github.com/stavinski/winhook v0.1.4 h1:5wxWPpwYo9MJLhjWKS+n1P4jwP88Xf3CVBndePYAK6o=
+github.com/stavinski/winhook v0.1.4/go.mod h1:dhJbZjQK2xrqC/R/UWAg93HoEVSz5LIZmO9L5M0GcJw=
+golang.org/x/sys v0.3.0 h1:w8ZOecv6NaNa/zC8944JTU3vz4u6Lagfk4RPQxv92NQ=
+golang.org/x/sys v0.3.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=

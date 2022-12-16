@@ -1,0 +1,1 @@
+go build -buildmode=c-shared -ldflags="-w -s -H=windowsgui" -trimpath -o cs.dll
