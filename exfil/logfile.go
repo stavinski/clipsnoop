@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 	"sync"
 
 	"golang.org/x/sys/windows"
@@ -21,9 +22,13 @@ type ExfilType struct {
 var Exfil *ExfilType
 
 // Write content to exfil
+//
+// Blocks the file write, so caller should ensure this does not interfere with hooked function if called multiple times or expects a fast execution
 func (e *ExfilType) Write(content string) {
 	if e.initialized {
+		log.Println(strings.Repeat("-", 50))
 		log.Println(content)
+		log.Println(strings.Repeat("-", 50))
 	}
 }
 
