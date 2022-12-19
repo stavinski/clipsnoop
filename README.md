@@ -16,9 +16,9 @@ Clipsnoop takes a different approach entirely and instead allows you to target o
 
 For convenience a `compile.bat` file is provided that can be tweaked for the built DLL. There are several variables that can be set:
 
-* **DLLNAME** - Filename of the built DLL (default: sc.dll), you may want to disguise this as a legit windows/application DLL
-* **DEBUG** - Enables debugging of the hooking code to help diagnose issues (default: false). Obviously should only be turned on while troubleshooting local issue.
-* **LOGPATH** - Full path of the log file to write the captured clipboard text to (default:c:\\users\\public\\documents\\ADVAPI32.DAT). You may want to disguise this as a legit looking log file. Make sure that the path is writeable for the executing context.
+* **DLLNAME** - Filename of the built DLL, you may want to disguise this as a legit windows/application DLL (default: sc.dll)
+* **DEBUG** - Enables debugging of the hooking code to help diagnose issues. Obviously should only be turned on while troubleshooting local issue. (default: false)
+* **LOGPATH** - Full path of the log file to write the captured clipboard text to. You may want to disguise this as a legit looking log file. Make sure that the path is writeable for the executing context. (default:c:\\users\\public\\documents\\ADVAPI32.DAT)
 
 ## Testing
 
